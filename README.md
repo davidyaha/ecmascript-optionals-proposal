@@ -1,4 +1,4 @@
-# ecmascript optionals proposal
+# Ecmascript optionals proposal
 
 An open to discussion proposal of Swift like optionals in javascript.
 
@@ -58,7 +58,7 @@ if let boxContent = box {
 
 JS is not a strongly typed language. 
 
-```es2015
+```javascript
 // Lets define a box in js
 let box = {};
 
