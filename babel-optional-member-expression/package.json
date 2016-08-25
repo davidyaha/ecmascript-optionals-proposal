@@ -1,0 +1,17 @@
+{
+  "name": "babel-optional-member-expression",
+  "description": "Babel plugin that will get rid of undefiend errors",
+  "repository": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js example.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-watch": "^2.0.2"
+  }
+}
