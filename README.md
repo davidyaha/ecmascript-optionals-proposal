@@ -80,6 +80,20 @@ console.log(box2 && box2.content);
 // Or safely unwrapping
 if (box2 && box2.content)
   console.log(box2.content)
+  
+// But when you have a deeper nested objects this gets messy really quick
+if (box2 && box2.content && typeof box2.content.countInvetory === 'function')
+  box2.content.countInvetory();
+  
+// Or
+if (box2 && box2.content && box2.content.carrots && box2.content.carrots.stale)
+  console.log(box2.content.carrots.stale);
+  
+// This could potentially be solved like this
+box2?.content?.countInventory?(); // Of course the question mark is not parsed this way
+                                  // on the current babylon parser so that needs to be
+                                  // PR'd. Untill then this could be fixed for any member 
+                                  // expression
 
 ```
 
@@ -88,4 +102,5 @@ if (box2 && box2.content)
 
 - [ ] Write babel plugin to allow every MemberExpression become a safe unwrap.
 - [ ] PR babylon with an optional flag to MemberExpression that will be triggered by the `?.` token or `?()` or `?[]`
+- [ ] PR flow to raise errors when not used with "nullable" types
 
