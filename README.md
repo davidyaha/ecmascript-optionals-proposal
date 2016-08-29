@@ -103,4 +103,5 @@ box2?.content?.countInventory?(); // Of course the question mark is not parsed t
 - [ ] Write babel plugin to allow every MemberExpression become a safe unwrap.
 - [ ] PR babylon with an optional flag to MemberExpression that will be triggered by the `?.` token or `?()` or `?[]`
 - [ ] PR flow to raise errors when not used with "nullable" types
+- [ ] Make an official tc39 proposal
 
