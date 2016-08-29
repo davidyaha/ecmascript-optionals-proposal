@@ -86,6 +86,6 @@ if (box2 && box2.content)
 
 ## Current Roadmap:
 
-[] Write babel plugin to allow every MemberExpression become a safe unwrap.
-[] PR babylon with an optional flag to MemberExpression that will be triggered by the `?.` token or `?()` or `?[]`
+- [ ] Write babel plugin to allow every MemberExpression become a safe unwrap.
+- [ ] PR babylon with an optional flag to MemberExpression that will be triggered by the `?.` token or `?()` or `?[]`
 
