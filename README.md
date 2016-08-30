@@ -97,7 +97,64 @@ box2?.content?.countInventory?(); // Of course the question mark is not parsed t
 
 ```
 
+## More examples of the optionals syntax
 
+```javascript
+var collection = [
+  {
+    a: 1
+  },
+  {
+    b: {
+      green: true
+    }
+  },
+  {
+    c: {
+      black: 'opaque'
+    }
+  },
+  {
+    c: {
+      black: 'opaque',
+      backgroundColor() {
+        return this.black;
+      }
+    }
+  }
+];
+
+var result = collection.filter(function (obj) {
+  return !!obj.a // No need for ?. notation here
+});
+
+// The following optional use
+result = collection.filter(function(obj) {
+  return !!obj.b?.green // NOTE the use of ?.
+});
+
+// Will be transpiled to the follwing
+result = collection.filter(function(obj) {
+  return !!(obj.b && obj.b.green)
+});
+
+// This optional function call
+collection.forEach(function(obj) {
+  console.log(obj.c?.backgroundColor?());
+});
+
+// Will be transpiled to
+collection.forEach(function(obj) {
+  obj.c && typeof obj.c.backgroundColor === 'function' ? console.log(obj.c.backgroundColor()) : void 0;
+});
+
+// And typically you would solve this scenario like this
+collection.forEach(function(obj) {
+  if (obj.c && typeof obj.c.backgroundColor === 'function')
+    console.log(obj.c.backgroundColor());
+});
+
+```
 ## Current Roadmap:
 
 - [ ] Write babel plugin to allow every MemberExpression become a safe unwrap.
