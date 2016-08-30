@@ -105,3 +105,8 @@ box2?.content?.countInventory?(); // Of course the question mark is not parsed t
 - [ ] PR flow to raise errors when not used with "nullable" types
 - [ ] Make an official tc39 proposal
 
+## Previous work
+
+- A strawman - https://github.com/claudepache/es-optional-chaining/
+- Discussion regurding the `?.` syntax - https://esdiscuss.org/topic/optional-chaining-aka-existential-operator-null-propagation
+
