@@ -50,7 +50,6 @@ function functionOptional(t, path) {
 }
 
 function isTypeofFunction(t, unaryExpression, objectIdentifier, functionIdentifier) {
-  console.log(unaryExpression);
   return t.isUnaryExpression(unaryExpression, {operator: 'typeof'}) &&
       unaryExpression.argument.object && unaryExpression.argument.object.name === objectIdentifier &&
       unaryExpression.argument.property && unaryExpression.argument.property.name === functionIdentifier;
