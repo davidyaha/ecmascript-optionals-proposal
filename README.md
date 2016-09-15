@@ -6,6 +6,44 @@ This repository was opened to bring the power of optionals and optional chaining
 
 PR's are very welcome!
 
+## Proposed Syntax
+```javascript
+// Optional member expression
+let field = object?.field;
+
+// Optional computed member expression
+let field = object?['field'];
+
+// Optional function call
+object.func?();
+
+// Optional chaining to get into deep fields
+let field = object?.field?.func?()?['data'];
+
+```
+
+Semantically speaking, all of these syntax additions makes sense and comply with usage of the current "unsafe" `.`, `()`, `[]`.
+The suggested syntax add the `?` to imply that the referred variable (or reference if you will) can be undefined and for that case we would like the whole expression to return as undefined.
+
+## Desugaring
+
+```javascript
+// Optional member expression
+var field = object && object.field;
+
+// Optional computed member expression
+var field = object && object['field'];
+
+// Optional function call
+typeof object.func === 'function' ? object.func() : null;
+
+// Optional chaining to get into deep fields
+var funcResult =  object && 
+                  object.field && 
+                  typeof object.field.func === 'function' ? object.field.func() : null;
+var field =  funcResult && funcResult['data'];
+```
+
 ## Where we need optionals in JS
 
 ```javascript
@@ -44,7 +82,7 @@ box2?.content?.countInventory?();
 
 ```
 
-## Where we really miss out on optionals
+## Another expample of where we miss out on optionals
 
 ```javascript
 var collection = [
@@ -102,6 +140,35 @@ collection.forEach(function(obj) {
 });
 
 ```
+
+## Syntax caveats
+
+This syntax uses the `?` character which is otherwise used on the ternary operator `? :`. 
+Backwards compatibility with examples like `useArray?[foo]:foo` 
+(was brought to my attention on [issue #2 of another proposal repository](https://github.com/claudepache/es-optional-chaining/issues/2#issuecomment-247311512))
+is in high priority and therefore the actual solution to allow for the suggested syntax, will have to keep
+precedence for the ternary operator. This means that forward inspection is needed and may cause some
+performance issues of the parser. After looking into the current implementation of babylon, I suggest that
+ we will set performance issues aside until actual implementation and get back to this matter 
+ if proven great impact on parsing speed.
+ 
+ ```javascript
+ // conditional statement or optional computed member expression?
+ useArray?[foo]:foo;
+ 
+ // With ternary precedence this should resolve as following:
+ useArray ? ([foo]) : foo;
+ 
+ // More complex example
+ useArray?[foo]?[bar]:foo;
+ 
+ // Should resolve as following:
+ useArray ? ([foo]?[bar]) : foo;
+ 
+ // And desugar as follows:
+ useArray ? ([foo] && [foo][bar]) : foo;
+ ```
+
 ## Current Roadmap:
 
 - [X] Write a babel plugin to demonstrate the behaviour. (Pushed a naive implementation)
