@@ -1,4 +1,6 @@
-# Ecmascript optionals proposal
+# To the official tc39 proposal go [here](https://github.com/tc39/proposal-optional-chaining)
+
+## Ecmascript optionals proposal
 
 An open to discussion proposal of Swift like optionals in javascript.
 
@@ -6,7 +8,7 @@ This repository was opened to bring the power of optionals and optional chaining
 
 PR's are very welcome!
 
-## Proposed Syntax
+### Proposed Syntax
 ```javascript
 // Optional member expression
 let field = object?.field;
@@ -25,7 +27,7 @@ let field = object?.field?.func?()?['data'];
 Semantically speaking, all of these syntax additions makes sense and comply with usage of the current "unsafe" `.`, `()`, `[]`.
 The suggested syntax add the `?` to imply that the referred variable (or reference if you will) can be undefined and for that case we would like the whole expression to return as undefined.
 
-## Desugaring
+### Desugaring
 
 ```javascript
 // Optional member expression
@@ -44,7 +46,7 @@ var funcResult =  object &&
 var field =  funcResult && funcResult['data'];
 ```
 
-## Where we need optionals in JS
+### Where we need optionals in JS
 
 ```javascript
 // Lets define a box in js
@@ -82,7 +84,7 @@ box2?.content?.countInventory?();
 
 ```
 
-## Another expample of where we miss out on optionals
+### Another expample of where we miss out on optionals
 
 ```javascript
 var collection = [
@@ -141,7 +143,7 @@ collection.forEach(function(obj) {
 
 ```
 
-## Syntax caveats
+### Syntax caveats
 
 This syntax uses the `?` character which is otherwise used on the ternary operator `? :`. 
 Backwards compatibility with examples like `useArray?[foo]:foo` 
@@ -169,14 +171,15 @@ performance issues of the parser. After looking into the current implementation 
  useArray ? ([foo] && [foo][bar]) : foo;
  ```
 
-## Current Roadmap:
+### Current Roadmap:
 
 - [X] Write a babel plugin to demonstrate the behaviour. (Pushed a naive implementation)
-- [ ] Make an official TC39 proposal and look for a champion
+- [X] Make an official TC39 proposal and look for a champion (https://github.com/tc39/proposal-optional-chaining)
+- [ ] Reach Stage 2
 - [ ] PR babylon with an optional flag to MemberExpression that will be triggered by the `?.` token or `?()` or `?[]`
 - [ ] PR flow to raise errors when not used with "nullable" types
 
-## Previous work
+### Previous work
 
 - A strawman - https://github.com/claudepache/es-optional-chaining/
 - Discussion regurding the `?.` syntax - https://esdiscuss.org/topic/optional-chaining-aka-existential-operator-null-propagation
