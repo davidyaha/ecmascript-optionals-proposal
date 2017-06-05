@@ -132,13 +132,16 @@ collection.forEach(function(obj) {
 
 // Will be transpiled to
 collection.forEach(function(obj) {
-  obj.c && typeof obj.c.backgroundColor === 'function' ? console.log(obj.c.backgroundColor()) : void 0;
+  console.log(obj.c && typeof obj.c.backgroundColor === 'function' ? obj.c.backgroundColor() : void 0);
 });
 
 // And typically you would solve this scenario like this
 collection.forEach(function(obj) {
-  if (obj.c && typeof obj.c.backgroundColor === 'function')
-    console.log(obj.c.backgroundColor());
+  let value = void 0;
+  if (obj.c && typeof obj.c.backgroundColor === 'function') {
+    value = obj.c.backgroundColor();
+  }
+  console.log(value);
 });
 
 ```
