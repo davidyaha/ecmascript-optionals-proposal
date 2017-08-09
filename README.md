@@ -185,4 +185,4 @@ performance issues of the parser. After looking into the current implementation 
 ### Previous work
 
 - A strawman - https://github.com/claudepache/es-optional-chaining/
-- Discussion regurding the `?.` syntax - https://esdiscuss.org/topic/optional-chaining-aka-existential-operator-null-propagation
+- Discussion regarding the `?.` syntax - https://esdiscuss.org/topic/optional-chaining-aka-existential-operator-null-propagation
